@@ -1,0 +1,22 @@
+<div>
+	<div> 
+
+<table class="table table-striped" >
+  <thead>
+    <tr>
+      <th>S. No </th>
+      <th>Project Name </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <%  @id = 1 %>
+		<% @project.each do |project| %>
+		<td>  <%= @id %> </td>
+		<td>  <%= project %> </td>
+    <% @id = @id+1 %>
+	</tr>
+		<% end%>
+   </tbody>
+</table>
+</div>

@@ -1,0 +1,15 @@
+<hr>
+
+<%= @usercondition  %>
+
+<div style="width:350px; float:left;">
+
+
+<span>
+
+<div>
+	<%= label_tag(:q, "Reset Runs:") %>
+	<%= button_to "Reset ", {:controller => "settings",:action => "application"} ,:method => :get, class:  "btn btn-danger"%>
+</div>
+</span>
+</div> 

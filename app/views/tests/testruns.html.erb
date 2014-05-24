@@ -1,0 +1,67 @@
+<div><!-- Search Form for Runs -->
+
+
+   <!-- <%= form_tag do %>
+   <span>
+      <label > Release ID </label>
+      <input type="text" class="input-medium search-query" style = "padding-left:50px" >
+      <label > Project </label>
+      <input type="text" class="input-medium search-query" style = "padding-left:50px" >
+      <label > Status </label>
+      <input type="text" class="input-medium search-query" style = "padding-left:50px" >
+      <button type="submit" class="btn" > <i class="icon-search"></i> </button>
+   </span>
+   <% end %> -->
+
+
+</div> 
+<!-- End Search form -->
+
+<span>
+<div style=" float:left;">
+      
+              <div style="width:350px; float:right;"><!-- Search Form for Runs -->
+
+              
+                <%= form_tag(tests_testruns_path, :method => "get", id: "search-form") do %>
+                  <b> Search </b>
+                <%= text_field_tag :search, params[:search], placeholder: "Search Projects , Releases , Status " , class: "input-medium search-query" %>
+                <button type="submit" class="btn" > <i class="icon-search"></i> </button>
+               
+              <% end %>
+
+              </div> <!-- End Search form -->
+</div>
+</span> 
+
+<div>
+  <div> 
+<table class="table table-striped" >
+  <thead>
+    <tr>
+      <th>Project </th>
+      <th>Release </th>
+      <th>Browser </th>
+      <th>Module Name </th>
+      <th>Test Case Name </th>
+      <th>Test Status </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <% @runs.each do |run| %>
+    <td>  <%= run.project %> </td>
+    <td>  <%= run.cycle %> </td>
+    <td>  <%= run.browser %> </td>
+    <td>  <%= run.testcase_module %> </td>
+    <td>  <%= run.testcase_name %> </td>
+    <td>  <%= run.testcase_status %> </td>
+  </tr>
+    <% end%>
+   </tbody>
+</table>
+</div>
+
+<!- add pagination->
+
+<%= will_paginate @runs, renderer: BootstrapPagination::Rails %>

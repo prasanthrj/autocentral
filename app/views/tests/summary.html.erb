@@ -1,0 +1,84 @@
+<div>
+
+  <hr>
+   <div style="width:750px " >
+      <%= form_for("/tests/summary", method: "get") do %>
+        <!-- <%= label_tag(:q, "Release:") %>
+         <%= select(:get, :release, @release_options) %> -->
+         <%= label_tag(:q, "Project:") %> 
+         <%= text_field_tag(:project) %>
+        <!-- <%= select(:get, :test2, @project_options) %>
+         <%= collection_select(:test, :project1, @project_options,  :to_s,:to_s, {:prompt => true}) %> -->
+         <button type="submit" class="btn" style = "margin-bottom:10px"> <i class="icon-filter"></i> </button>
+      <% end %>
+
+</div>
+
+<%= debug(params) %>
+<hr>
+
+  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      
+      function drawChart() {
+
+        var array2 = [
+          ['Year', 'Sales'],
+          ['2004',  1000],
+          ['2005',  1170],
+          ['2006',  660],
+          ['2007',  1030]
+        ];
+
+        var array1 = <%= raw @dataArray.to_json %>;
+
+
+        var data = google.visualization.arrayToDataTable(array1);
+
+        var options = {
+          title: 'Test Automation Summary',
+          vAxis: {title: 'Test Module',  titleTextStyle: {color: 'black'}}
+        };
+
+        var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+
+         var chart = new google.visualization.BarChart(document.getElementById('chart_div4'));
+        chart.draw(data, options);
+
+      }
+    </script>
+
+    <hr>
+
+<!-- Chart Type 2 -->
+
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+
+        var array1 = <%= raw @dataArray.to_json %>;
+
+
+        var data = google.visualization.arrayToDataTable(array1);
+
+        var options = {
+          title: 'Test Automation Summary',
+          hAxis: {title: 'Module Name ', titleTextStyle: {color: 'black'}}
+        };
+
+        var chart = new google.visualization.ColumnChart(document.getElementById('chart_div5'));
+        chart.draw(data, options);
+      }
+    </script>
+
+   <span>
+
+    <div id="chart_div" style="width: 800px; height: 450px;" class = "box"></div> </p>
+    <div id="chart_div5" style="width: 800px  ; height: 450px;" class = "box"></div>
+   </span>
+</div>

@@ -1,0 +1,21 @@
+<div>
+	<div> 
+<table class="table table-striped" >
+  <thead>
+    <tr>
+      <th>S. No </th>
+      <th>Releases Name </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+    	<%  @id = 1 %>
+		<% @releases.each do |release| %>
+		<td>  <%= @id %></td>
+		<td>  <%= release %> </td>
+		<% @id = @id+1 %> 
+	</tr>
+		<% end%>
+   </tbody>
+</table>
+</div>
