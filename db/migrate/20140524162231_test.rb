@@ -38,3 +38,4 @@ class Test < ActiveRecord::Migration
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 end
 end
+end
