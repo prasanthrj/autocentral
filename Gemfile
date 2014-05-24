@@ -57,3 +57,7 @@ gem 'thin'
 # Devise gem for authentication
 
  gem 'devise', github: 'plataformatec/devise'
+ 
+group :production, :staging do
+  gem "pg"
+end

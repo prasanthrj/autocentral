@@ -30,10 +30,7 @@ test:
   host: localhost
 
 production:
-  adapter: mysql2
+  adapter: postgresql
   encoding: utf8
   database: autocentral_production
   pool: 5
-  username: root
-  password:
-  host: localhost
