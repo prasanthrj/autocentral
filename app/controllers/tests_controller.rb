@@ -44,9 +44,9 @@ before_filter :authenticate_user!
     @modulepassmodule = @modulepassmodule.to_a.push modules
 
     @dataArray =  @dataArray.to_a.push [modules,Run.where(:testcase_module => modules).count,
-    	Run.where(:testcase_module => modules , :testcase_status => "Fail").count,
-    	Run.where(:testcase_module => modules , :testcase_status => "Skipped").count,
-    	Run.where(:testcase_module => modules , :testcase_status => "Passed").count ]
+    	Run.where(:testcase_module => modules , :testcase_status => "FAIL").count,
+    	Run.where(:testcase_module => modules , :testcase_status => "SKIP").count,
+    	Run.where(:testcase_module => modules , :testcase_status => "PASS").count ]
 
      end
 
