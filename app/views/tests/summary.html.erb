@@ -1,21 +1,31 @@
 <div>
 
   <hr>
+
    <div style="width:750px " >
       <%= form_for("/tests/summary", method: "get") do %>
         <!-- <%= label_tag(:q, "Release:") %>
          <%= select(:get, :release, @release_options) %> -->
-         <%= label_tag(:q, "Project:") %> 
-         <%= text_field_tag(:project) %>
-        <!-- <%= select(:get, :test2, @project_options) %>
-         <%= collection_select(:test, :project1, @project_options,  :to_s,:to_s, {:prompt => true}) %> -->
-         <button type="submit" class="btn" style = "margin-bottom:10px"> <i class="icon-filter"></i> </button>
+         <%= label_tag(:q, "Search By Project") %>
+         
+        <!-- <%= select("get",:project, @project_options, {include_blank: true}) %> -->
+         <%= select_tag(:project , options_for_select( @project_options),{include_blank: true}) %>
+         <!-- <%= collection_select(:test, :project1, @project_options,  :to_s,:to_s, {:prompt => true}) %> -->
+         <button type="submit" class="btn" style = "margin-bottom:10px"> <i class="icon-search"></i> </button>
       <% end %>
-
 </div>
 
-<%= debug(params) %>
-<hr>
+
+  <div style="width:750px " >
+      <%= form_for("/tests/summary", method: "get") do %>
+         <b><%= label_tag(:q, "Search By Release") %> </b>
+         <%= select_tag(:rel, options_for_select( @release_options),{include_blank: true}) %>
+         <button type="submit" class="btn" style = "margin-bottom:10px"> <i class="icon-search"></i> </button>
+      <% end %>
+</div>
+
+
+<!-- debug(params) %> -->
 
   <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
@@ -23,14 +33,6 @@
       google.setOnLoadCallback(drawChart);
       
       function drawChart() {
-
-        var array2 = [
-          ['Year', 'Sales'],
-          ['2004',  1000],
-          ['2005',  1170],
-          ['2006',  660],
-          ['2007',  1030]
-        ];
 
         var array1 = <%= raw @dataArray.to_json %>;
 

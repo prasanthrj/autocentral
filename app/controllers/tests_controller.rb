@@ -23,29 +23,28 @@ before_filter :authenticate_user!
     @dataArray = [['Module Name','Total Test Cases','Failed',"Skipped","Passed"]]
   	
 
-  	if params[:release]
-  	@modulecount = Run.where("cycle like ? " , "%#{params[:release]}%" ).uniq.pluck(:testcase_module)
-    end
+  	if params[:rel] then
+  	@modulecount = Run.where("cycle like ? " , "%#{params[:rel]}%" ).uniq.pluck(:testcase_module)
 
-    if params[:module]
-    @modulecount = Run.where("testcase_module like ? " , "%#{params[:module]}%" ).uniq.pluck(:testcase_module)
-    end
+    elsif params[:module] then
     
-    if params[:project]
+    @modulecount = Run.where("testcase_module like ? " , "%#{params[:module]}%" ).uniq.pluck(:testcase_module)
+    
+    elsif params[:project] then
+
     @modulecount = Run.where("project like ? " , "%#{params[:project]}%" ).uniq.pluck(:testcase_module)
     else
     @modulecount = Run.uniq.pluck(:testcase_module)
     end
   
-
-
+  
   	@modulecount.each do |modules|
 
     @modulepasscount = @modulepasscount.to_a.push Run.where(:testcase_module => modules).count
     @modulepassmodule = @modulepassmodule.to_a.push modules
 
     @dataArray =  @dataArray.to_a.push [modules,Run.where(:testcase_module => modules).count,
-    	Run.where(:testcase_module => modules , :testcase_status => "Failed").count,
+    	Run.where(:testcase_module => modules , :testcase_status => "Fail").count,
     	Run.where(:testcase_module => modules , :testcase_status => "Skipped").count,
     	Run.where(:testcase_module => modules , :testcase_status => "Passed").count ]
 
@@ -72,11 +71,18 @@ before_filter :authenticate_user!
     else
     @runs = Run.all.order('created_at DESC').paginate(:page => params[:page], :per_page => 15)
     end
+
+      respond_to do |format|
+      format.html
+      format.csv { render text: @runs.to_csv }
+      format.xls
+                 end
+
   end
 
   def extras
 
-  	    @runs = Run.new(:testcase_name=>"Sample Test Case2", :testcase_status=>"Failed", 
+  	    @runs = Run.new(:testcase_name=>"Sample Test Case2", :testcase_status=>"Fail", 
     	            :browser=>"crome" , :project=>"EM", :testcase_module=>"Test Module 2", 
     	            :cycle=>"L1R2", :testcase_type=>"Functional").save
         @runs = Run.new(:testcase_name=>"Sample Test Case3", :testcase_status=>"Skipped", 

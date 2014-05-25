@@ -2,8 +2,7 @@ class SettingsController < ApplicationController
  
 
 def appsettings
-
-	 render "layouts/login"
+	
   
 end
 
