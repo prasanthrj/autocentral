@@ -1,6 +1,39 @@
 
 <div>
 
-First Page
+<table class="table-striped" style="width:900px">
+  <thead>
+    <tr>
+      <th>Total Projects </th>
+      <th>Total Releases </th>
+      <th>Total Test Runs </th>
+      <th>Total Passed </th>
+      <th>Total Failed </th>
+      <th>Total Skipped </th>
+    </tr>
+  </thead>
+  <tbody>
+  	  <!-- Project listing -->
 
+  	<td>
+  	<% @tprojects.each do |project| %>
+  	<div> <%= project %></div>
+  	<% end %>
+    </td>
+
+    <!-- -->
+
+    <td>
+  	<% @treleases.each do |release| %>
+  	<div> <%= release %></div>
+  	<% end %>
+    </td>
+
+    <td><%= @truns %></td>
+    <td><%= @tpass %></td>
+	<td><%= @tfail %></td>
+	<td><%= @tskip %></td>
+  </tr>
+  </tbody>
+</table>
 </div>

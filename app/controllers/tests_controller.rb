@@ -8,6 +8,13 @@ before_filter :authenticate_user!
 
   def firstpage
 
+    @tprojects = Run.uniq.pluck(:project)
+    @treleases = Run.uniq.pluck(:cycle)
+    @truns = Run.count
+    @tpass = Run.where(:testcase_status =>"PASS").count
+    @tfail = Run.where(:testcase_status =>"FAIL").count
+    @tskip = Run.where(:testcase_status =>"SKIP").count
+
   end
 
   def summary
